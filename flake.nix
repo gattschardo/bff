@@ -36,8 +36,7 @@
             env.HSA_OVERRIDE_GFX_VERSION = "${GFX_VERSION}";
 
             buildPhase = ''
-              mkdir -p build
-              hipcc -O2 --amdgpu-target=${ROCM_GPU} src/main.cpp -o build/bff
+              make all
             '';
 
             installPhase = ''
@@ -53,8 +52,12 @@
             packages = with pkgs.rocmPackages; [
               hipcc
               rocminfo
+              clr
               rocm-smi
-            ];
+            ] ++ [ pkgs.gnumake ];
+
+            # TODO: calculate based on ROCM_GPU
+            HSA_OVERRIDE_GFX_VERSION = "11.5.0";
 
             shellHook = ''
               echo "HIP shell; ROCm GPU(s):"
