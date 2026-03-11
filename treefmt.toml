@@ -1,0 +1,11 @@
+[[formats]]
+name = "clang-format"
+command = "clang-format"
+format = ["**/*.cpp", "**/*.h"]
+excludes = []
+
+[[formats]]
+name = "nixpkgs-format"
+command = "nixpkgs-format"
+format = ["*.nix"]
+excludes = []
